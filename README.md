@@ -29,13 +29,7 @@ I designed and engineered the entire pipeline to ingest complex columnar data in
 ## 🏗️ Architecture Blueprint
 
 I decoupled the compute-and-storage pattern over the **Medallion Framework** across three distinct structural horizons (Bronze, Silver, and Gold):
-<img width="1500" height="1778" alt="image" src="https://github.com/user-attachments/assets/18359216-5224-4576-b371-ee4b2891e1b7" />
-
-
-> **Architectural Note:** *Replace the placeholder below with your actual architecture diagram image once uploaded to your GitHub repository.*
-
-[![System Architecture Diagram](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)  
-*Figure 1: Custom Engineered Multi-Tier Data Pipeline Architecture.*](https://app.eraser.io/workspace/lfXNPi7oZKOKgq0S1Tuz?origin=share&diagram=kwDhlHVdj5QORqwolZdnT)
+![Uploading image.png…]()
 
 ---
 
