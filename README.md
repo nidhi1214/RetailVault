@@ -34,8 +34,8 @@ I decoupled the compute-and-storage pattern over the **Medallion Framework** acr
 
 > **Architectural Note:** *Replace the placeholder below with your actual architecture diagram image once uploaded to your GitHub repository.*
 
-![System Architecture Diagram](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)  
-*Figure 1: Custom Engineered Multi-Tier Data Pipeline Architecture.*
+[![System Architecture Diagram](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)  
+*Figure 1: Custom Engineered Multi-Tier Data Pipeline Architecture.*](https://app.eraser.io/workspace/lfXNPi7oZKOKgq0S1Tuz?origin=share&diagram=kwDhlHVdj5QORqwolZdnT)
 
 ---
 
