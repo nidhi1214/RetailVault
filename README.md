@@ -29,3 +29,45 @@ I designed and engineered the entire pipeline to ingest complex columnar data in
 ## 🏗️ Architecture Blueprint
 
 I decoupled the compute-and-storage pattern over the **Medallion Framework** across three distinct structural horizons (Bronze, Silver, and Gold):
+<img width="1500" height="1778" alt="image" src="https://github.com/user-attachments/assets/18359216-5224-4576-b371-ee4b2891e1b7" />
+
+
+> **Architectural Note:** *Replace the placeholder below with your actual architecture diagram image once uploaded to your GitHub repository.*
+
+![System Architecture Diagram](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)  
+*Figure 1: Custom Engineered Multi-Tier Data Pipeline Architecture.*
+
+---
+
+## 🛠️ Multi-Layer Lifecycle & Technical Highlights
+
+### 🟫 1. The Bronze Layer (Streaming Ingestion & Auto Loader)
+* **Ingestion Strategy:** I configured the pipeline to capture raw incremental files (shipped as compressed columnar Parquet files) from Azure Data Lake Storage (ADLS) Gen2 using **Spark Structured Streaming** and **Databricks Auto Loader (`cloudFiles`)**.
+* **Idempotency & Guardrails:** I configured explicit trigger settings (`AvailableNow`) paired with localized checkpoint management directory tracking. This guarantees exactly-once processing constraints (Idempotency), preventing downstream operational duplication.
+* **Schema Evolution:** I implemented isolated schema log locations. The engine dynamically infers file adjustments, trapping structural variations without causing streaming jobs to drop or terminate.
+
+### ⬜ 2. The Silver Layer (Enterprise Transformation & Python OOP)
+* **Object-Oriented PySpark:** I designed modular Python classes to systematically clean records. I abstracted the ingestion structures through programmatic routines, ensuring absolute structural reusability across diverse source streams.
+* **Data Cleansing Guardrails:** I enforced row-level data quality thresholds. My processing logic captures and isolates corrupted variants, standardizes primitive types, handles missing values, and prunes missing entity keys.
+* **Unity Catalog Reusable Functions:** I built custom, catalog-registered functions inside Unity Catalog to enforce corporate business data transforms globally across distinct organizational domains.
+
+### 🟨 3. The Gold Layer (Star Schema, SCD Type 1 & Type 2)
+The curated analytical destination is constructed using a hybrid strategy to model a comprehensive **Star Schema** comprised of distinct Dimension and Fact tables:
+* **SCD Type 1 (Overwrite/Upsert):** I implemented this programmatically by constructing direct PySpark `MERGE INTO` conditional trees, recalculating rolling business metrics while tracking structural state tables natively.
+* **SCD Type 2 (Historical Tracked):** I engineered this layer utilizing **Delta Live Tables (DLT)**. Leveraging the declarative DLT API (`dlt.apply_changes`), my pipeline records audit histories by automatically generating system `START_AT`, `END_AT`, and `IS_CURRENT` flag markers.
+
+---
+
+## 📂 Repository Structure
+
+I organized the codebase to isolate job orchestration definitions from active data engine compute:
+
+```text
+├── config/                 # Cloud network configurations & ADLS Storage Mount definitions
+├── notebooks/              # Operational Core Compute Engine Notebooks
+│   ├── 01_Ingestion/       # Auto Loader configuration files parsing raw data to Bronze
+│   ├── 02_Cleansing/       # Python OOP classes applying business filtering rules for Silver
+│   └── 03_Modeling/        # Custom SQL MERGE statement configurations establishing Gold
+├── dlt_pipelines/          # Declarative Delta Live Tables configurations for SCD Type 2 state tracking
+├── workflows/              # Parameterized JSON blueprints mapping multi-task workflow lineages
+└── sql_scripts/            # Data Warehouse schema configurations and Fact table def
