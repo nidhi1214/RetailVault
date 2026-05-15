@@ -29,7 +29,7 @@ I designed and engineered the entire pipeline to ingest complex columnar data in
 ## 🏗️ Architecture Blueprint
 
 I decoupled the compute-and-storage pattern over the **Medallion Framework** across three distinct structural horizons (Bronze, Silver, and Gold):
-![Uploading image.png…]()
+[![Uploading image.png…]()](https://app.eraser.io/workspace/lfXNPi7oZKOKgq0S1Tuz?diagram=kwDhlHVdj5QORqwolZdnT)
 
 ---
 
